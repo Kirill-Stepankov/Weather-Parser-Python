@@ -8,10 +8,10 @@ def test_temp():
     max_temp = 70
     k = 273
     try:
-        t1, t2 = parserweatherAPI.weather('London')
+        t1, t2 = parserweatherAPI.weather(55.755826, 37.6172999)
         t1 = t1 - k
         t2 = t2 - k
-        if min_temp < t1 < max_temp and min_temp < t2 < max_temp:
+        if t1 > min_temp and t1 < max_temp and t2 > min_temp and t2 < max_temp:
             print('Pass')
         else:
             print('Fail - Temperature is abnormal ' + str(t1) + " " + str(t2))
@@ -27,6 +27,8 @@ def test_temp():
 
 
 test_temp()
+
+
 
 
 

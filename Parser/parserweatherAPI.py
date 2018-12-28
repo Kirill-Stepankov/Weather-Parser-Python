@@ -3,21 +3,38 @@ import datetime
 import traceback
 
 
-def weather(town):
+def geocoor(city):
+    param = {'address': city, 
+            'key': 'AIzaSyCqRl7suPEuPPJC8-qyU9sYp4WI2xg6aq0',
+            'language': 'en', 
+             }
+
+    t = requests.get('https://maps.googleapis.com/maps/api/geocode/json', params = param)
+    r = t.json()
+       
+
+    if 'error_message' in r:
+        print('City not found')
+    else:        
+        return r['results'][0]['geometry']['location']['lat'], r['results'][0]['geometry']['location']['lng']
+
+def weather(lat,lng):
     sett = {'APPID': '5b0b407d31e708c9d526008c893bbd2b',
-            'q': town
+            'lat': lat,
+            'lon': lng,
             }
     weatherfile = requests.get('http://api.openweathermap.org/data/2.5/weather', params=sett)
-    k = weatherfile.json()
-    if k == {'cod': '404', 'message': 'city not found'}:
-        print('City not found')
+    k = weatherfile.json()    
+    if k == {'cod': '400', 'message': str(lat)+' is not a float'}:
+        print('invalid coordinates')
     else:
         return k['main']['temp_min'], k['main']['temp_max']
 
 
 try:
-    city = input('Название вашего города(на английском): ')
-    min, max = weather(city)
+    city = input('Название вашего города: ')
+    lat, lng = geocoor(city)
+    min, max = weather(lat, lng)
     date = datetime.date.today()
     print('Погода в ' + city,
           'на',
