@@ -3,6 +3,13 @@ import datetime
 import traceback
 
 
+#
+# Parser accepts cities in Russian and English.
+# To add the ability to enter a city in Russian, I had to add a geocoding API.
+# The weather parser is based on the Openweather API.
+#
+
+
 def geocoor(city):
     param = {'address': city, 
             'key': 'AIzaSyCqRl7suPEuPPJC8-qyU9sYp4WI2xg6aq0',
