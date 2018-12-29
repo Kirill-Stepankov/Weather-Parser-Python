@@ -12,7 +12,7 @@ import traceback
 
 def geocoor(city):
     param = {'address': city, 
-            'key': 'AIzaSyCqRl7suPEuPPJC8-qyU9sYp4WI2xg6aq0',
+            'key': {YOUR API KEY},
             'language': 'en', 
              }
 
@@ -26,7 +26,7 @@ def geocoor(city):
         return r['results'][0]['geometry']['location']['lat'], r['results'][0]['geometry']['location']['lng']
 
 def weather(lat,lng):
-    sett = {'APPID': '5b0b407d31e708c9d526008c893bbd2b',
+    sett = {'APPID': {YOUR API KEY},
             'lat': lat,
             'lon': lng,
             }
